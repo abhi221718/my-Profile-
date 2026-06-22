@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import bbImage from '../../img/bb.jpg'
-import videoBg from '../../img/video 2.mp4'
 import './App.css'
+
+const videoBg = '/video2.mp4'
 
 const services = [
   {
@@ -60,6 +61,13 @@ const projects = [
   },
 ]
 
+const aiSuggestions = [
+  'What services do you offer?',
+  'Can you show me your projects?',
+  'How can I contact you?',
+  'What skills do you use?',
+]
+
 function App() {
   const [theme, setTheme] = useState('light')
   const [isEntered, setIsEntered] = useState(false)
@@ -69,6 +77,10 @@ function App() {
     message: '',
   })
   const [submitMessage, setSubmitMessage] = useState('')
+  const [aiQuery, setAiQuery] = useState('')
+  const [aiAnswer, setAiAnswer] = useState(
+    'Hi I am Abhishek Sharma, projects, skills, or how to contact me.',
+  )
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme')
@@ -112,6 +124,37 @@ function App() {
       ...prev,
       [name]: value,
     }))
+  }
+
+  const getAiReply = (question) => {
+    const q = question.toLowerCase()
+
+    if (q.includes('service') || q.includes('help') || q.includes('work')) {
+      return 'I offer Web Development, UI/UX Design, Data Analysis, and Brand Building services.'
+    }
+    if (q.includes('project') || q.includes('portfolio') || q.includes('github')) {
+      return 'You can explore my projects in the Projects section. I build modern websites, landing pages, and UI components.'
+    }
+    if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('instagram')) {
+      return 'You can email me at sharmaabhishek52272@gmail.com or call +91 9839503774.'
+    }
+    if (q.includes('skill') || q.includes('technology') || q.includes('tech')) {
+      return 'My main skills are HTML & CSS, JavaScript, React, Node.js, Git & GitHub, and responsive design.'
+    }
+
+    return 'I can help with services, projects, skills, or contact details. Ask me anything about my portfolio.'
+  }
+
+  const handleAiSubmit = (event) => {
+    event.preventDefault()
+    const trimmedQuestion = aiQuery.trim()
+    if (!trimmedQuestion) return
+    setAiAnswer(getAiReply(trimmedQuestion))
+  }
+
+  const handleAiSuggestion = (question) => {
+    setAiQuery(question)
+    setAiAnswer(getAiReply(question))
   }
 
   return (
@@ -245,6 +288,40 @@ function App() {
                     <p>{service.description}</p>
                   </article>
                 ))}
+              </div>
+            </section>
+
+            <section className="ai-help" id="ai-help">
+              <div className="section-heading">
+                <p className="section-tag">Quick Help</p>
+                <h3>AI Assistant</h3>
+              </div>
+              <div className="ai-help-card">
+                <p className="ai-help-intro">
+                  Ask me anything about my services, skills, projects, or contact details.
+                </p>
+                <div className="ai-suggestions">
+                  {aiSuggestions.map((suggestion) => (
+                    <button
+                      type="button"
+                      key={suggestion}
+                      className="ai-suggestion"
+                      onClick={() => handleAiSuggestion(suggestion)}
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+                <form className="ai-help-form" onSubmit={handleAiSubmit}>
+                  <input
+                    type="text"
+                    value={aiQuery}
+                    onChange={(event) => setAiQuery(event.target.value)}
+                    placeholder="Ask something..."
+                  />
+                  <button type="submit">Ask</button>
+                </form>
+                <p className="ai-answer">{aiAnswer}</p>
               </div>
             </section>
 
