@@ -1,0 +1,329 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Ubuntu", sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background: linear-gradient(90deg, #eef2ff 0%, #f9fafb 100%);
+}
+
+.sidebar{
+    background: #111827;
+    width: 240px;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+.sidebar nav li {
+    list-style: none;
+    margin: 18px 0;
+}
+
+.sidebar nav li a{
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 18px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.sidebar nav li a:hover{
+    background: #1f2937;
+}
+
+.main{
+    width: calc(100% - 240px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.infoContainer{
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.devInfo{
+    max-width: 550px;
+}
+
+.hello{
+    font-size: 28px;
+    color: #4f46e5;
+}
+
+.name{
+    font-size: 52px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.about{
+    font-size: 28px;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.moreabout{
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+.buttons{
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+}
+
+.buttons button{
+    padding: 14px 18px;
+    border-radius: 999px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    background: #3730a3;
+}
+
+.devPic img{
+    width: 420px;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+.contact{
+    width: calc(100% - 240px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.contactform{
+    width: 100%;
+    max-width: 700px;
+}
+
+.value{
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.value h1{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 18px;
+}
+
+.form-control,
+.form-control-plaintext,
+textarea.form-control{
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.colbutton{
+    width: 100%;
+    padding: 14px;
+    background: #111827;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.back{
+    width: calc(100% - 240px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+}
+
+.side{
+    max-width: 900px;
+}
+
+.intro{
+    font-size: 28px;
+    color: #4f46e5;
+    margin-bottom: 10px;
+}
+
+.naam{
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.aboutme{
+    font-size: 18px;
+    line-height: 1.8;
+    color: #4b5563;
+    margin-bottom: 16px;
+}
+
+.floater{
+    padding: 0 40px 40px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.link{
+    display: flex;
+    gap: 12px;
+}
+
+.link button{
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.services-page{
+    width: calc(100% - 240px);
+    padding: 50px 40px;
+}
+
+.profile,
+.socal{
+    margin-bottom: 30px;
+}
+
+.profile details,
+.socal details{
+    width: 100%;
+}
+
+.profile summary,
+.socal summary{
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.docment{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.service-box{
+    background: #fff;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.service-box h3{
+    margin-bottom: 8px;
+}
+
+@media (max-width: 900px){
+    .container{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        width: 100%;
+        min-height: 100%;
+    }
+
+    .main,
+    .contact,
+    .back,
+    .services-page{
+        width: 100%;
+    }
+
+    .infoContainer{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .docment{
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .devPic img{
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+    }
+}
+
+
+/* ############################################ service ######################################### */
+
+.service-section .docment{
+    width: 81vw;
+    height: 42vh;
+    display: flex;
+    unicode-bidi: isolate;
+}
+
+.service-section .im{
+    border-radius: 25px;
+    margin: 2px 5px;
+    cursor: pointer;
+    height: 119px;
+    width: 147px;
+    display: flex;
+}
+
+.service-section img{
+    display: flex;
+}
+
+.service-section summary{
+    padding: 5px 103px;
+    text-align: center;
+    border-radius: 32px;
+    background-color: darkcyan;
+    margin: 37px 48px;
+    cursor: pointer;
+    height: 52px;
+    width: 289px;
+}
+
+ details{
+    display: inline-block;
+ }
