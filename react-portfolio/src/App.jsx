@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import bbImage from '../../img/bb.jpg'
+import videoBg from '../../img/video 2.mp4'
 import './App.css'
 
 const services = [
@@ -117,6 +118,14 @@ function App() {
     <div className={`portfolio ${theme}`}>
       {!isEntered ? (
         <section className="landing-screen">
+          <video
+            className="landing-video"
+            src={videoBg}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
           <button
             className="landing-card"
             onClick={() => setIsEntered(true)}
@@ -322,6 +331,30 @@ function App() {
               </div>
             </section>
           </main>
+
+          <footer className="footer">
+            <div>
+              <a href="#home" className="footer-logo">
+                Abhi<span>.</span>
+              </a>
+            </div>
+            <div className="footer-links">
+              <a href="#home">Home</a>
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
+            </div>
+            <div className="footer-socials">
+              <a href="https://github.com" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                Instagram
+              </a>
+              <a href="mailto:sharmaabhishek52272@gmail.com">Email</a>
+            </div>
+          </footer>
         </>
       )}
     </div>
