@@ -1,0 +1,54 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build resume analyzer frontend
+        working-directory: RESUME/frontend
+        env:
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
+        run: |
+          npm install
+          npm run build
+      - name: Assemble portfolio and resume analyzer site
+        run: |
+          mkdir -p _site/img _site/RESUME/frontend
+          cp index.html home.html contact.html intro.html servise.html profile.css profile-1.js _site/
+          cp -R img/. _site/img/
+          cp RESUME/index.html _site/RESUME/index.html
+          cp -R RESUME/frontend/dist _site/RESUME/frontend/dist
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

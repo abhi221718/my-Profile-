@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: skillmatch-api
+    runtime: python
+    plan: free
+    rootDir: RESUME/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: FRONTEND_ORIGINS
+        value: https://abhi221718.github.io
+      - key: MONGODB_DATABASE
+        value: ai_resume_analyzer
