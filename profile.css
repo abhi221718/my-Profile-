@@ -387,6 +387,90 @@ textarea.form-control{
     box-shadow: 0 9px 18px rgba(15, 23, 42, 0.08);
 }
 
+.intro-project-section{
+    width: 100%;
+    padding: 0 clamp(18px, 5vw, 64px) 52px;
+    background: #f5f7fb;
+}
+
+.intro-project-card{
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    max-width: 1120px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 52px);
+    overflow: hidden;
+    border: 1px solid rgba(199, 210, 254, 0.7);
+    border-radius: 28px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(196, 181, 253, 0.45), transparent 42%),
+        linear-gradient(135deg, #111827, #25235a 68%, #312e81);
+    box-shadow: 0 22px 48px rgba(31, 41, 55, 0.17);
+    animation: intro-card-enter 0.65s 0.12s both;
+}
+
+.intro-project-content{
+    max-width: 650px;
+}
+
+.intro-project-eyebrow{
+    margin-bottom: 12px;
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.intro-project-content h2{
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.04em;
+}
+
+.intro-project-content > p:not(.intro-project-eyebrow){
+    margin-bottom: 24px;
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.intro-project-mark{
+    display: flex;
+    width: 150px;
+    height: 150px;
+    flex: 0 0 150px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid rgba(221, 214, 254, 0.35);
+    border-radius: 38px;
+    background: linear-gradient(145deg, rgba(167, 139, 250, 0.35), rgba(79, 70, 229, 0.2));
+    box-shadow: inset 2px 2px 8px rgba(255, 255, 255, 0.16), 0 18px 32px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transform: perspective(500px) rotateY(-10deg) rotateX(6deg);
+}
+
+.intro-project-mark span:first-child{
+    color: #ddd6fe;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.intro-project-mark span:last-child{
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-align: center;
+}
+
 .intro-footer{
     padding: 28px clamp(18px, 5vw, 64px);
     background: #111827;
@@ -1004,6 +1088,33 @@ textarea.form-control{
 
     .intro-footer{
         padding: 24px 18px;
+    }
+
+    .intro-project-section{
+        padding: 0 16px 34px;
+    }
+
+    .intro-project-card{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 26px 22px;
+        border-radius: 23px;
+    }
+
+    .intro-project-content .intro-action{
+        width: 100%;
+    }
+
+    .intro-project-mark{
+        width: 104px;
+        height: 104px;
+        flex-basis: 104px;
+        border-radius: 28px;
+    }
+
+    .intro-project-mark span:first-child{
+        font-size: 34px;
     }
 
     .intro-footer-inner{
