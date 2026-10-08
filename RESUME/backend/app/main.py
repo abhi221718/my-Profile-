@@ -351,6 +351,90 @@ def compare_job(resume_text: str, resume_skills: list[str], job: dict) -> dict:
     }
 
 
+def generate_interview_prep(
+    resume_skills: list[str], job_match: dict
+) -> dict:
+    title = job_match["title"]
+    missing_skills = job_match["missing_skills"]
+    matched_skills = job_match["matched_skills"]
+    required_skills = job_match["required_skills"]
+    focus_skills = (missing_skills[:4] + matched_skills[:4])[:6]
+    if not focus_skills:
+        focus_skills = resume_skills[:5]
+
+    topics = [
+        {
+            "topic": skill,
+            "priority": "High priority" if skill in missing_skills else "Review",
+            "guidance": (
+                f"Review the fundamentals of {skill} and practice a small task. Be honest "
+                "about your current experience; explain how you would approach learning it."
+                if skill in missing_skills
+                else f"Prepare a real example of how you used {skill}, including your decisions and results."
+            ),
+        }
+        for skill in focus_skills
+    ]
+    if not required_skills:
+        topics.insert(
+            0,
+            {
+                "topic": f"{title} fundamentals",
+                "priority": "Core",
+                "guidance": "Review the role's core responsibilities and be ready to explain your approach to the main tasks.",
+            },
+        )
+    topics.extend(
+        [
+            {
+                "topic": "Resume project deep dive",
+                "priority": "Core",
+                "guidance": "Choose a relevant project and prepare to explain its goal, your contribution, tools, trade-offs, and outcome.",
+            },
+            {
+                "topic": "Behavioral examples (STAR)",
+                "priority": "Core",
+                "guidance": "Prepare concise Situation, Task, Action, and Result stories about teamwork, challenges, and learning.",
+            },
+        ]
+    )
+
+    questions = [
+        f"Which project from your resume is most relevant to the {title} role, and what did you personally deliver?",
+        "Describe a difficult technical or team challenge. What did you do, and what was the result?",
+    ]
+    questions.extend(
+        f"How have you used {skill} in a real project, and what trade-off or decision did you make?"
+        for skill in matched_skills[:2]
+    )
+    questions.extend(
+        f"This role asks for {skill}. How would you approach a practical task with it, and what would you learn first?"
+        for skill in missing_skills[:2]
+    )
+    questions.append(
+        f"What would you focus on during your first month as a {title}?"
+    )
+
+    preparation_plan = [
+        f"Study the top role-specific topics: {', '.join(focus_skills[:3])}."
+        if focus_skills
+        else f"Review the main responsibilities and core concepts for a {title} role.",
+        "Practice a 60–90 second introduction that connects your experience to this role.",
+        "Prepare two STAR stories and one project walkthrough; include accurate results where available.",
+    ]
+    if missing_skills:
+        preparation_plan.insert(
+            1,
+            f"Prioritize these skill gaps: {', '.join(missing_skills[:3])}. Review the basics and try a small hands-on exercise.",
+        )
+
+    return {
+        "topics": topics,
+        "practice_questions": questions[:7],
+        "preparation_plan": preparation_plan,
+    }
+
+
 def make_suggestions(text: str, candidate: dict[str, str], skills: list[str], matches: list[dict]) -> list[str]:
     normalized = text.lower()
     suggestions = []
@@ -461,6 +545,8 @@ async def analyze_resume(
         compare_job(text, skills, job)
         for job in normalized_jobs
     ]
+    for match in job_matches:
+        match["interview_prep"] = generate_interview_prep(skills, match)
     job_matches.sort(key=lambda match: match["match_percentage"], reverse=True)
     suggestions = make_suggestions(text, candidate, skills, job_matches)
 

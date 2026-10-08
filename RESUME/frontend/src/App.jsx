@@ -168,6 +168,9 @@ function App() {
         ["Match", `${match.match_percentage}%`],
         ["Matched skills", match.matched_skills.join(", ") || "None"],
         ["Missing skills", match.missing_skills.join(", ") || "None"],
+        ["Interview topics", (match.interview_prep?.topics || []).map((topic) => `${topic.topic} (${topic.priority})`).join("; ") || "Not available"],
+        ["Interview practice questions", (match.interview_prep?.practice_questions || []).join("\n") || "Not available"],
+        ["Interview preparation plan", (match.interview_prep?.preparation_plan || []).join("\n") || "Not available"],
       ]),
       ["Suggestions", result.suggestions.map((item) => `- ${item}`).join("\n")],
     ];
@@ -194,6 +197,7 @@ function App() {
         <p className="nav-caption">WORKSPACE</p>
         <a className="nav-link active" href="#analyzer"><Icon name="chart" size={18} /> Resume analyzer</a>
         <a className="nav-link" href="#results"><Icon name="file" size={18} /> Analysis report</a>
+        <a className="nav-link" href="#interview-prep"><Icon name="spark" size={18} /> Interview prep</a>
         <div className="sidebar-bottom">
           <div className="privacy-card">
             <span className="privacy-icon"><Icon name="check" size={16} /></span>
@@ -218,7 +222,7 @@ function App() {
             <div>
               <p className="overline">YOUR NEXT OPPORTUNITY STARTS HERE</p>
               <h1>Make your resume<br /><span>work smarter.</span></h1>
-              <p className="welcome-copy">Get a clear picture of your strengths, improve your resume, and find the right fit for your next role.</p>
+              <p className="welcome-copy">Understand your strengths, compare job fit, and get focused interview topics and practice questions for each role.</p>
             </div>
             <div className="hero-decoration" aria-hidden="true"><div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" /><div className="hero-spark"><Icon name="spark" size={48} /></div><span className="hero-label">GOOD THINGS<br />ARE AHEAD</span></div>
           </section>
@@ -248,7 +252,7 @@ function App() {
             </section>
 
             <section className="panel jobs-panel">
-              <div className="section-heading"><div className="step-number">02</div><div><h2>Add job descriptions</h2><p>Compare your resume with one or more roles.</p></div></div>
+              <div className="section-heading"><div className="step-number">02</div><div><h2>Add job descriptions</h2><p>Compare job fit and tailor interview prep for each role.</p></div></div>
               {jobs.map((job, index) => (
                 <div className="job-input-card" key={index}>
                   <div className="job-card-top"><label htmlFor={`job-title-${index}`}>JOB {String(index + 1).padStart(2, "0")} <span>OPTIONAL TITLE</span></label>{jobs.length > 1 &&                   <button type="button" className="icon-button" aria-label="Remove job" onClick={() => { setJobs((current) => current.filter((_, position) => position !== index)); setResult(null); setNotice(""); }}><Icon name="close" size={16} /></button>}</div>
@@ -427,6 +431,63 @@ function App() {
                 </div>
               </article>
 
+              <article className="result-card interview-prep-card" id="interview-prep">
+                <div className="report-card-heading interview-prep-heading">
+                  <div>
+                    <h3>Interview preparation</h3>
+                    <p className="muted-copy">Role-specific topics, practice questions, and a focused plan based on your resume and each job description.</p>
+                  </div>
+                  <span className="subtle-tag"><Icon name="spark" size={13} /> PERSONALIZED</span>
+                </div>
+                <div className="interview-prep-list">
+                  {result.job_matches.map((match, index) => {
+                    const prep = match.interview_prep || {};
+                    return (
+                      <section className="interview-job-prep" key={`${index}-${match.title}`}>
+                        <div className="interview-job-heading">
+                          <div>
+                            <span className="interview-role-label">PREP FOR ROLE</span>
+                            <h4>{match.title}</h4>
+                          </div>
+                          <span className="interview-topic-count">{(prep.topics || []).length} focus topics</span>
+                        </div>
+                        <div className="interview-prep-columns">
+                          <div className="interview-prep-block">
+                            <h5>Topics to prepare</h5>
+                            {prep.topics?.length ? (
+                              <ul className="interview-topic-list">
+                                {prep.topics.map((topic) => (
+                                  <li className={topic.priority === "High priority" ? "interview-topic-high" : ""} key={`${topic.topic}-${topic.priority}`}>
+                                    <div className="interview-topic-title">
+                                      <strong>{topic.topic}</strong>
+                                      <span className={`priority-badge ${topic.priority === "High priority" ? "priority-high" : ""}`}>{topic.priority}</span>
+                                    </div>
+                                    <p>{topic.guidance}</p>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="interview-empty">Interview prep is not available for this report. Analyze again after the analyzer update is active.</p>
+                            )}
+                          </div>
+                          <div className="interview-prep-block">
+                            <h5>Practice questions</h5>
+                            <ol className="interview-question-list">
+                              {(prep.practice_questions || []).map((question) => <li key={question}>{question}</li>)}
+                            </ol>
+                            <h5 className="prep-plan-title">Your preparation plan</h5>
+                            <ol className="prep-plan-list">
+                              {(prep.preparation_plan || []).map((step) => <li key={step}>{step}</li>)}
+                            </ol>
+                          </div>
+                        </div>
+                      </section>
+                    );
+                  })}
+                </div>
+                <p className="interview-note">Use these suggestions as practice prompts, not predictions of exact interview questions. Build answers from your real experience and be transparent about skills you are still learning.</p>
+              </article>
+
               <article className="result-card suggestions-card">
                 <div className="report-card-heading">
                   <h3>Ways to strengthen your resume</h3>
@@ -441,7 +502,7 @@ function App() {
               <p className="disclaimer">For guidance only. This score is based on resume structure, detected skills, and text similarity. It is not a hiring decision and does not predict job performance.</p>
             </section>
           )}
-          {!result && <section className="how-it-works"><div className="how-icon"><Icon name="clock" size={18} /></div><div><strong>What happens next?</strong><p>We extract resume text, identify your skills and experience, then compare it against every job description you provide.</p></div><span>ABOUT 10 SECONDS</span></section>}
+          {!result && <section className="how-it-works"><div className="how-icon"><Icon name="clock" size={18} /></div><div><strong>What happens next?</strong><p>We identify resume skills, compare each role, then suggest interview topics, questions, and practical preparation steps.</p></div><span>ABOUT 10 SECONDS</span></section>}
           <footer className="app-footer"><span>SkillMatch <span className="brand-period">•</span> AI Resume Analyzer</span><span>Built to help you take the next step.</span></footer>
         </div>
       </main>

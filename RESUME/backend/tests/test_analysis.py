@@ -6,6 +6,7 @@ from app.main import (
     compare_job,
     extract_candidate,
     extract_skills,
+    generate_interview_prep,
 )
 
 
@@ -71,6 +72,29 @@ class ResumeAnalysisTests(unittest.TestCase):
             [],
         )
         self.assertEqual(breakdown["measurable_achievements"], 10)
+
+    def test_interview_prep_prioritizes_missing_skills_and_uses_job_title(self):
+        resume_skills = ["Python", "SQL"]
+        job = {"title": "Data Analyst", "description": "Python, SQL, and AWS"}
+        match = compare_job("Python and SQL projects", resume_skills, job)
+
+        prep = generate_interview_prep(resume_skills, match)
+
+        self.assertEqual(prep["topics"][0]["topic"], "AWS")
+        self.assertEqual(prep["topics"][0]["priority"], "High priority")
+        self.assertTrue(any("Data Analyst" in question for question in prep["practice_questions"]))
+        self.assertTrue(any("AWS" in item for item in prep["preparation_plan"]))
+
+    def test_interview_prep_has_role_fallback_when_no_skills_are_detected(self):
+        resume_skills = []
+        job = {"title": "Product Designer", "description": "Create thoughtful customer journeys"}
+        match = compare_job("Portfolio and customer research", resume_skills, job)
+
+        prep = generate_interview_prep(resume_skills, match)
+
+        self.assertEqual(prep["topics"][0]["topic"], "Product Designer fundamentals")
+        self.assertGreaterEqual(len(prep["practice_questions"]), 3)
+        self.assertEqual(len(prep["preparation_plan"]), 3)
 
 
 if __name__ == "__main__":
