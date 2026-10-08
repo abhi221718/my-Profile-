@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
-    <link rel="stylesheet" href="profile.css?v=0b53c36">
+    <link rel="stylesheet" href="profile.css?v=services-20261008">
 </head>
 <body>
     <div class="container">
@@ -24,51 +24,69 @@
             </nav>
         </div>
         <div class="services-page">
-            <div class="profile">
-                <details>
-                    <summary>What I Offer</summary>
-                    <div class="docment">
-                        <div class="service-box">
-                            <h3>Web Development</h3>
-                            <p>Responsive and modern websites built for performance.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>UI/UX Design</h3>
-                            <p>Clean and user-focused design for better experiences.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>GitHub Projects</h3>
-                            <p>Projects uploaded and shared on GitHub for portfolio display.</p>
-                        </div>
-                        <a class="service-link" href="RESUME/">
-                            <div class="service-box">
-                                <h3>AI Resume Analyzer</h3>
-                                <p>Analyze a resume and compare it with job descriptions using NLP.</p>
-                            </div>
-                        </a>
-                    </div>
-                </details>
-            </div>
+            <header class="services-intro">
+                <p class="services-eyebrow">WHAT I DO</p>
+                <h1 class="services-title">Services & Projects</h1>
+                <p class="services-description">
+                    Thoughtful design and reliable development to turn ideas into useful digital experiences.
+                </p>
+            </header>
 
-            <div class="socal">
-                <details>
-                    <summary>Connect With Me</summary>
-                    <div class="docment">
-                        <div class="service-box">
-                            <h3>Email</h3>
+            <section class="service-grid" aria-label="Services and projects">
+                <article class="service-card">
+                    <div class="service-card-top">
+                        <span class="service-number">01</span>
+                        <span class="service-tag">BUILD</span>
+                    </div>
+                    <h2>Web Development</h2>
+                    <p>Responsive, modern websites built to work smoothly across devices.</p>
+                </article>
+                <article class="service-card">
+                    <div class="service-card-top">
+                        <span class="service-number">02</span>
+                        <span class="service-tag">DESIGN</span>
+                    </div>
+                    <h2>UI/UX Design</h2>
+                    <p>Clean, user-focused interfaces that make digital experiences easier to use.</p>
+                </article>
+                <article class="service-card">
+                    <div class="service-card-top">
+                        <span class="service-number">03</span>
+                        <span class="service-tag">OPEN SOURCE</span>
+                    </div>
+                    <h2>GitHub Projects</h2>
+                    <p>Explore practical projects and experiments built and shared on GitHub.</p>
+                </article>
+                <a class="service-card service-card-link" href="RESUME/">
+                    <div class="service-card-top">
+                        <span class="service-number">04</span>
+                        <span class="service-tag">LIVE PROJECT</span>
+                    </div>
+                    <h2>AI Resume Analyzer</h2>
+                    <p>Compare a resume with a job description using natural language processing.</p>
+                    <span class="service-card-cta">Explore project <span aria-hidden="true">→</span></span>
+                </a>
+            </section>
+
+            <section class="connect-section">
+                <details class="connect-details">
+                    <summary>Connect with me</summary>
+                    <div class="connect-grid">
+                        <div class="connect-card">
+                            <h2>Email</h2>
                             <p>abhishek@example.com</p>
                         </div>
-                        <div class="service-box">
-                            <h3>Phone</h3>
+                        <div class="connect-card">
+                            <h2>Phone</h2>
                             <p>+91 98765 43210</p>
                         </div>
-                        <div class="service-box">
-                            <h3>Location</h3>
+                        <div class="connect-card">
+                            <h2>Location</h2>
                             <p>India</p>
                         </div>
                     </div>
                 </details>
-            </div>
+            </section>
         </div>
     </div>
     <script src="navigation.js"></script>
