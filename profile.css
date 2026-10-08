@@ -338,48 +338,119 @@ textarea.form-control{
 }
 
 .connect-section{
-    margin-top: 42px;
+    position: relative;
+    isolation: isolate;
+    margin-top: 48px;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(199, 210, 254, 0.72);
+    border-radius: 28px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(199, 210, 254, 0.48), transparent 42%),
+        linear-gradient(135deg, #f8faff 0%, #eef2ff 100%);
 }
 
-.connect-details{
-    display: block;
-    width: 100%;
-    padding: 22px 24px;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.72);
+.connect-heading{
+    margin-bottom: 22px;
 }
 
-.connect-details summary{
+.connect-heading h2{
+    margin-bottom: 8px;
     color: #111827;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    letter-spacing: -0.03em;
+}
+
+.connect-heading > p:last-child{
+    max-width: 560px;
+    color: #6b7280;
+    font-size: 15px;
+    line-height: 1.65;
 }
 
 .connect-grid{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
-    margin-top: 18px;
 }
 
 .connect-card{
-    padding: 16px;
-    border-radius: 14px;
-    background: #f9fafb;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid rgba(229, 231, 235, 0.92);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.045);
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    animation: connect-card-enter 0.55s both;
 }
 
-.connect-card h2{
-    margin-bottom: 6px;
+.connect-card:nth-child(2){
+    animation-delay: 0.08s;
+}
+
+.connect-card:nth-child(3){
+    animation-delay: 0.16s;
+}
+
+.connect-card:hover{
+    transform: translateY(-4px);
+    border-color: #c7d2fe;
+    box-shadow: 0 14px 26px rgba(79, 70, 229, 0.11);
+}
+
+.connect-icon{
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    place-items: center;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #4f46e5, #7c3aed);
+    box-shadow: 0 7px 14px rgba(79, 70, 229, 0.22);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.connect-icon-location{
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+
+.connect-card h3{
+    margin-bottom: 5px;
     color: #374151;
     font-size: 14px;
+    font-weight: 700;
 }
 
 .connect-card p{
     color: #6b7280;
-    font-size: 14px;
+    font-size: 13px;
     overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+@keyframes connect-card-enter{
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .connect-card{
+        animation: none;
+        transition: none;
+    }
 }
 
 @media (max-width: 900px){
@@ -439,7 +510,7 @@ textarea.form-control{
     }
 
     .connect-grid{
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .devPic img{
@@ -586,6 +657,20 @@ textarea.form-control{
 
     .services-page{
         padding-top: 28px;
+    }
+
+    .connect-section{
+        margin-top: 34px;
+        padding: 24px 18px;
+        border-radius: 22px;
+    }
+
+    .connect-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .connect-card{
+        padding: 16px;
     }
 
     .services-intro{
