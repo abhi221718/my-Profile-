@@ -228,11 +228,230 @@ textarea.form-control{
     cursor: pointer;
 }
 
+.intro-page{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.intro-page .container{
+    flex: 1;
+    min-height: 0;
+}
+
+.intro-page .sidebar{
+    min-height: auto;
+}
+
 .services-page{
     width: calc(100% - 240px);
     max-width: 1320px;
     margin: 0 auto;
     padding: 56px clamp(24px, 5vw, 72px);
+}
+
+.intro-page .back{
+    flex: 1;
+    min-height: 620px;
+    padding: clamp(32px, 6vw, 84px);
+    background:
+        radial-gradient(ellipse at 90% 15%, rgba(199, 210, 254, 0.45), transparent 36%),
+        linear-gradient(145deg, #eef2ff 0%, #f9fafb 58%, #f5f7fb 100%);
+}
+
+.intro-page .side{
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    max-width: 960px;
+    padding: clamp(30px, 6vw, 64px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 26px 70px rgba(30, 41, 59, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    animation: intro-card-enter 0.65s both;
+}
+
+.intro-page .side::after{
+    position: absolute;
+    z-index: -1;
+    top: -90px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 24px rgba(99, 102, 241, 0.035), 0 0 0 52px rgba(99, 102, 241, 0.025);
+    content: "";
+}
+
+.intro-page .intro{
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 8px 13px;
+    border: 1px solid #e0e7ff;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #4338ca;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+}
+
+.intro-page .naam{
+    max-width: 760px;
+    margin-bottom: 22px;
+    color: #111827;
+    font-size: clamp(2.5rem, 6.5vw, 4.7rem);
+    line-height: 1.08;
+    letter-spacing: -0.055em;
+}
+
+.intro-page .aboutme{
+    max-width: 760px;
+    margin-bottom: 16px;
+    color: #596579;
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    line-height: 1.85;
+}
+
+.intro-highlights{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.intro-highlights span{
+    padding: 9px 13px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #fff;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.intro-actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.intro-action{
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.intro-action:hover{
+    transform: translateY(-2px);
+}
+
+.intro-action:focus-visible{
+    outline: 3px solid #a5b4fc;
+    outline-offset: 3px;
+}
+
+.intro-action-primary{
+    background: linear-gradient(135deg, #4f46e5, #6d28d9);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.24);
+    color: #fff;
+}
+
+.intro-action-primary:hover{
+    box-shadow: 0 14px 26px rgba(79, 70, 229, 0.32);
+}
+
+.intro-action-secondary{
+    border-color: #d1d5db;
+    background: rgba(255, 255, 255, 0.8);
+    color: #374151;
+}
+
+.intro-action-secondary:hover{
+    background: #fff;
+    box-shadow: 0 9px 18px rgba(15, 23, 42, 0.08);
+}
+
+.intro-footer{
+    padding: 28px clamp(18px, 5vw, 64px);
+    background: #111827;
+    color: #d1d5db;
+}
+
+.intro-footer-inner{
+    display: grid;
+    max-width: 1320px;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 18px 32px;
+    margin: 0 auto;
+}
+
+.intro-footer-brand{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.intro-footer-about p{
+    margin-top: 6px;
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.intro-footer-links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 18px;
+}
+
+.intro-footer-links a{
+    color: #d1d5db;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.intro-footer-links a:hover,
+.intro-footer-links a:focus-visible{
+    color: #c7d2fe;
+}
+
+.intro-footer-copy{
+    grid-column: 1 / -1;
+    padding-top: 14px;
+    border-top: 1px solid #374151;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+@keyframes intro-card-enter{
+    from{
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .services-intro{
@@ -590,8 +809,13 @@ textarea.form-control{
 
 @media (prefers-reduced-motion: reduce){
     .service-card,
-    .connect-card{
+    .connect-card,
+    .intro-page .side{
         animation: none;
+        transition: none;
+    }
+
+    .intro-action{
         transition: none;
     }
 }
@@ -665,7 +889,8 @@ textarea.form-control{
     .side,
     .contactform,
     .value,
-    .services-page{
+    .services-page,
+    .intro-page .side{
         width: 100%;
         max-width: 100%;
     }
@@ -748,6 +973,51 @@ textarea.form-control{
     .back,
     .services-page{
         padding: 24px 16px 32px;
+    }
+
+    .intro-page .back{
+        min-height: 0;
+        padding: 26px 16px 34px;
+    }
+
+    .intro-page .side{
+        padding: 27px 21px;
+        border-radius: 23px;
+    }
+
+    .intro-page .naam{
+        font-size: clamp(2.35rem, 10vw, 3.4rem);
+    }
+
+    .intro-page .aboutme{
+        font-size: 1rem;
+        line-height: 1.72;
+    }
+
+    .intro-actions{
+        flex-direction: column;
+    }
+
+    .intro-action{
+        width: 100%;
+    }
+
+    .intro-footer{
+        padding: 24px 18px;
+    }
+
+    .intro-footer-inner{
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .intro-footer-links{
+        justify-content: flex-start;
+        gap: 12px 16px;
+    }
+
+    .intro-footer-copy{
+        grid-column: auto;
     }
 
     .hello,

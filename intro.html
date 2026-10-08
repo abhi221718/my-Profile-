@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro</title>
-    <link rel="stylesheet" href="profile.css?v=0b53c36">
+    <link rel="stylesheet" href="profile.css?v=intro-footer-20261008">
 </head>
-<body>
+<body class="intro-page">
     <div class="container">
         <div class="sidebar">
             <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-navigation">
@@ -23,28 +23,49 @@
                 </ul>
             </nav>
         </div>
-        <div class="back">
-            <div class="side">
-                <div class="intro">Software Developer</div>
-                <div class="naam">Hi, I’m Abhishek Sharma</div>
-                <div class="aboutme">
+        <main class="back">
+            <section class="side" aria-labelledby="intro-name">
+                <p class="intro">SOFTWARE DEVELOPER</p>
+                <h1 class="naam" id="intro-name">Hi, I’m Abhishek Sharma</h1>
+                <p class="aboutme">
                     I’m a passionate web developer who enjoys building creative, responsive,
                     and user-friendly websites. I focus on clean code, strong design, and
                     practical solutions that help ideas grow into real digital experiences.
-                </div>
-                <div class="aboutme">
+                </p>
+                <p class="aboutme">
                     Over time, I’ve worked on personal websites, business landing pages,
                     and UI-focused projects that improve both appearance and performance.
+                </p>
+                <div class="intro-highlights" aria-label="Areas of focus">
+                    <span>Web Development</span>
+                    <span>Responsive Design</span>
+                    <span>UI/UX</span>
                 </div>
+                <div class="intro-actions">
+                    <a class="intro-action intro-action-primary" href="servise.html">
+                        Explore Services <span aria-hidden="true">→</span>
+                    </a>
+                    <a class="intro-action intro-action-secondary" href="contact.html">Contact Me</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class="intro-footer">
+        <div class="intro-footer-inner">
+            <div class="intro-footer-about">
+                <a class="intro-footer-brand" href="home.html">Abhishek Sharma</a>
+                <p>Building thoughtful, responsive digital experiences.</p>
             </div>
+            <nav class="intro-footer-links" aria-label="Footer navigation">
+                <a href="home.html">Home</a>
+                <a href="servise.html">Services</a>
+                <a href="mailto:sharmaabhishek52272@gmail.com">Email</a>
+                <a href="https://www.instagram.com/lifestart__new_way__?stkn=MW1vdHNycmdzZWVqbw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/abhishek-sharma-498688347?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </nav>
+            <p class="intro-footer-copy">&copy; 2026 Abhishek Sharma</p>
         </div>
-    </div>
-    <div class="floater">
-        <div class="link">
-            <button>Download CV</button>
-            <a href="contact.html"><button>Contact Me</button></a>
-        </div>
-    </div>
+    </footer>
     <script src="navigation.js"></script>
 </body>
 </html>
