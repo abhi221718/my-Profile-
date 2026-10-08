@@ -41,7 +41,7 @@ jobs:
       - name: Assemble portfolio and resume analyzer site
         run: |
           mkdir -p _site/img _site/RESUME/frontend
-          cp index.html home.html contact.html intro.html servise.html profile.css profile-1.js _site/
+          cp index.html home.html contact.html intro.html servise.html profile.css profile-1.js navigation.js _site/
           cp -R img/. _site/img/
           cp RESUME/index.html _site/RESUME/index.html
           cp -R RESUME/frontend/dist _site/RESUME/frontend/dist

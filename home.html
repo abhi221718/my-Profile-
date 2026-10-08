@@ -9,8 +9,13 @@
 <body>
     <div class="container">
         <div class="sidebar">
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav>
-                <ul>
+                <ul id="site-navigation">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="servise.html">Services</a></li>
                     <li><a href="intro.html">My Intro</a></li>
@@ -28,16 +33,17 @@
                         I build modern websites and digital experiences that combine clean design,
                         strong functionality, and real business value.
                     </div>
-                    <div class="buttons">
-                        <a href="#contact"><button>Contact Me</button></a>
-                        <a href="intro.html"><button>About Me</button></a>
-                    </div>
                 </div>
                 <div class="devPic">
-                    <img src="img/aaa.jpg" alt="Abhishek Sharma">
+                    <img src="img/abhi.jpg" alt="Abhishek Sharma">
+                    <div class="buttons">
+                        <a href="contact.html"><button>Contact Me</button></a>
+                        <a href="intro.html"><button>About Me</button></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="navigation.js"></script>
 </body>
 </html>
