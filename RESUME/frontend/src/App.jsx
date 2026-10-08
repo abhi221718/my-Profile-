@@ -57,6 +57,61 @@ function ScoreRing({ score }) {
   );
 }
 
+function createInterviewPrep(match) {
+  const matchedSkills = match.matched_skills || [];
+  const missingSkills = match.missing_skills || [];
+  const requiredSkills = match.required_skills || [];
+  const focusSkills = [...missingSkills.slice(0, 4), ...matchedSkills.slice(0, 4)].slice(0, 6);
+  const title = match.title || "this role";
+  const topics = focusSkills.map((skill) => ({
+    topic: skill,
+    priority: missingSkills.includes(skill) ? "High priority" : "Review",
+    guidance: missingSkills.includes(skill)
+      ? `Review the fundamentals of ${skill} and practice a small task. Be honest about your current experience; explain how you would approach learning it.`
+      : `Prepare a real example of how you used ${skill}, including your decisions and results.`,
+  }));
+  if (!requiredSkills.length) {
+    topics.unshift({
+      topic: `${title} fundamentals`,
+      priority: "Core",
+      guidance: "Review the role's core responsibilities and be ready to explain your approach to the main tasks.",
+    });
+  }
+  topics.push(
+    {
+      topic: "Resume project deep dive",
+      priority: "Core",
+      guidance: "Choose a relevant project and explain its goal, your contribution, tools, trade-offs, and outcome.",
+    },
+    {
+      topic: "Behavioral examples (STAR)",
+      priority: "Core",
+      guidance: "Prepare concise Situation, Task, Action, and Result stories about teamwork, challenges, and learning.",
+    },
+  );
+
+  const practiceQuestions = [
+    `Which project from your resume is most relevant to the ${title} role, and what did you personally deliver?`,
+    "Describe a difficult technical or team challenge. What did you do, and what was the result?",
+    ...matchedSkills.slice(0, 2).map((skill) => `How have you used ${skill} in a real project, and what trade-off or decision did you make?`),
+    ...missingSkills.slice(0, 2).map((skill) => `This role asks for ${skill}. How would you approach a practical task with it, and what would you learn first?`),
+    `What would you focus on during your first month as a ${title}?`,
+  ].slice(0, 7);
+
+  const preparationPlan = [
+    focusSkills.length
+      ? `Study the top role-specific topics: ${focusSkills.slice(0, 3).join(", ")}.`
+      : `Review the main responsibilities and core concepts for a ${title} role.`,
+    ...(missingSkills.length
+      ? [`Prioritize these skill gaps: ${missingSkills.slice(0, 3).join(", ")}. Review the basics and try a small hands-on exercise.`]
+      : []),
+    "Practice a 60–90 second introduction that connects your experience to this role.",
+    "Prepare two STAR stories and one project walkthrough; include accurate results where available.",
+  ];
+
+  return { topics, practice_questions: practiceQuestions, preparation_plan: preparationPlan };
+}
+
 function App() {
   const [file, setFile] = useState(null);
   const [jobs, setJobs] = useState([{ title: "", description: "" }]);
@@ -168,9 +223,9 @@ function App() {
         ["Match", `${match.match_percentage}%`],
         ["Matched skills", match.matched_skills.join(", ") || "None"],
         ["Missing skills", match.missing_skills.join(", ") || "None"],
-        ["Interview topics", (match.interview_prep?.topics || []).map((topic) => `${topic.topic} (${topic.priority})`).join("; ") || "Not available"],
-        ["Interview practice questions", (match.interview_prep?.practice_questions || []).join("\n") || "Not available"],
-        ["Interview preparation plan", (match.interview_prep?.preparation_plan || []).join("\n") || "Not available"],
+        ["Interview topics", createInterviewPrep(match).topics.map((topic) => `${topic.topic} (${topic.priority})`).join("; ")],
+        ["Interview practice questions", createInterviewPrep(match).practice_questions.join("\n")],
+        ["Interview preparation plan", createInterviewPrep(match).preparation_plan.join("\n")],
       ]),
       ["Suggestions", result.suggestions.map((item) => `- ${item}`).join("\n")],
     ];
@@ -441,7 +496,7 @@ function App() {
                 </div>
                 <div className="interview-prep-list">
                   {result.job_matches.map((match, index) => {
-                    const prep = match.interview_prep || {};
+                    const prep = match.interview_prep || createInterviewPrep(match);
                     return (
                       <section className="interview-job-prep" key={`${index}-${match.title}`}>
                         <div className="interview-job-heading">
